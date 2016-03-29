@@ -8,11 +8,12 @@ int main() {
 
     int fd = open("/dev/usbtmc0", O_RDWR);
 
-    char *command  = "VOLT:DC:RANG 7\n";
+    //char *command  = "VOLT:DC:RANG 7\n";
+    char *command  = "MEAS:DIOD?\n";
     char *command2 = "VOLT:DC:RANG?\n";
     int so = sizeof(command);
 
-    write(fd, command,  18);
+    write(fd, command,  11);
     //write(fd, command2, 18);
 
     ssize_t size = read(fd, &buf, 512);
