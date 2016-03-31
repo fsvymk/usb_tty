@@ -28,7 +28,7 @@ int main() {
         int fd = open("/dev/usbtmc0", O_RDWR);
         gets(command);
         int szStr = strlen(command);
-        printf("Length is %d\n", szStr);
+        //printf("Length is %d\n", szStr);
         write(fd, command,  szStr);
         write(fd, '\n', 1);
 
@@ -37,8 +37,10 @@ int main() {
         char x = buf[0];
         char y = buf[1];
 
-        printf("Read byte %d %d | %c %c\n", x, y , buf[0], buf[1]);
-        printf("Size %d\n", size);
+        //printf("Read byte %d %d | %c %c\n", x, y , buf[0], buf[1]);
+       // printf("Size %d\n", size);
+        printf("==> %s \n\n", buf);
+
 
         close(fd);
     }
