@@ -1,3 +1,9 @@
+/*
+ * TRIG:SOUR?
+ *
+ *
+ * //
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -11,23 +17,30 @@ int main() {
         buf[i] = 0;
     }
 
-    int fd = open("/dev/usbtmc0", O_RDWR);
+
 
     //char *command  = "VOLT:DC:RANG 7\n";
-    //char *command  = "MEAS:DIOD?\n";
-    char *command = "VOLT:DC:RANG?\n";
-    int so = sizeof(command);
+    char *command[50];
+    //char *command = "VOLT:DC:RANG?\n";
 
-    write(fd, command,  13);
-    //write(fd, command2, 18);
+    while(1==1){
+        // Цикл
+        int fd = open("/dev/usbtmc0", O_RDWR);
+        gets(command);
+        int szStr = strlen(command);
+        printf("Length is %d\n", szStr);
+        write(fd, command,  szStr);
+        write(fd, '\n', 1);
 
-    ssize_t size = read(fd, &buf, 32);
+        ssize_t size = read(fd, &buf, 32);
 
-    char x = buf[0];
-    char y = buf[1];
+        char x = buf[0];
+        char y = buf[1];
 
-    printf("Read byte %d %d | %c %c\n", x, y , buf[0], buf[1]);
-    printf("Size %d\n", size);
+        printf("Read byte %d %d | %c %c\n", x, y , buf[0], buf[1]);
+        printf("Size %d\n", size);
 
+        close(fd);
+    }
     return 0;
 }
